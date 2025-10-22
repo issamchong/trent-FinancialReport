@@ -1,4 +1,4 @@
-import { DollarSign, Users, CreditCard, Activity, Sparkles } from "lucide-react"
+import { DollarSign, Users, CreditCard, Activity, Sparkles, Home } from "lucide-react"
 
 import { financialData } from "@/lib/data"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -7,10 +7,9 @@ import { OverviewChart } from "@/components/dashboard/overview-chart"
 import { ExpenseChart } from "@/components/dashboard/expense-chart"
 import { InsightGenerator } from "@/components/dashboard/insight-generator"
 import { PdfExportButton } from "@/components/pdf-export-button"
-import { Logo } from "@/components/icons"
 import Link from "next/link"
 
-export default function Home() {
+export default function HomePage() {
   const { monthlyRevenue, conversionRate, averageOrderValue, profitability, expenseSummary, revenueTrend } = financialData
 
   const totalExpenses = Object.values(expenseSummary).reduce((sum, value) => sum + value, 0)
@@ -35,8 +34,8 @@ export default function Home() {
     <div className="flex min-h-screen w-full flex-col">
       <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:px-6 no-print">
         <Link href="/" className="flex items-center gap-2">
-          <Logo className="h-6 w-6 text-primary" />
-          <span className="text-lg font-semibold">InsightBoard</span>
+          <Home className="h-6 w-6 text-primary" />
+          <span className="text-lg font-semibold">Main Dashboard</span>
         </Link>
         <div className="ml-auto">
           <PdfExportButton />
