@@ -8,6 +8,7 @@ import { ExpenseChart } from "@/components/dashboard/expense-chart"
 import { InsightGenerator } from "@/components/dashboard/insight-generator"
 import { PdfExportButton } from "@/components/pdf-export-button"
 import { Logo } from "@/components/icons"
+import Link from "next/link"
 
 export default function Home() {
   const { monthlyRevenue, conversionRate, averageOrderValue, profitability, expenseSummary, revenueTrend } = financialData
@@ -33,10 +34,10 @@ export default function Home() {
   return (
     <div className="flex min-h-screen w-full flex-col">
       <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:px-6 no-print">
-        <div className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <Logo className="h-6 w-6 text-primary" />
           <span className="text-lg font-semibold">InsightBoard</span>
-        </div>
+        </Link>
         <div className="ml-auto">
           <PdfExportButton />
         </div>
