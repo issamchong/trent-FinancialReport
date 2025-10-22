@@ -1,6 +1,6 @@
 'use client'
 
-import { Bar, BarChart, Line, LineChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts"
+import { Line, LineChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts"
 import { ChartTooltipContent } from "@/components/ui/chart"
 
 type OverviewChartProps = {
@@ -14,17 +14,39 @@ export function OverviewChart({ data }: OverviewChartProps) {
         <LineChart data={data}>
           <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
           <YAxis
+            yAxisId="left"
             stroke="#888888"
             fontSize={12}
             tickLine={false}
             axisLine={false}
             tickFormatter={(value) => `$${value / 1000}k`}
           />
+          <YAxis
+            yAxisId="right"
+            orientation="right"
+            stroke="#888888"
+            fontSize={12}
+            tickLine={false}
+            axisLine={false}
+            tickFormatter={(value) => `$${value}`}
+          />
           <Tooltip
-            content={<ChartTooltipContent />}
+            content={<ChartTooltipContent 
+              formatter={(value, name) => {
+                if (name === "revenue") {
+                  return [`$${(value as number).toLocaleString()}`, "Revenue"]
+                }
+                if (name === "aov") {
+                  return [`$${(value as number).toFixed(2)}`, "Avg. Order Value"]
+                }
+                return [value, name]
+              }}
+              labelFormatter={(label) => `Month: ${label}`}
+            />}
             cursor={{ fill: 'hsl(var(--muted))', radius: 4 }}
           />
           <Line
+            yAxisId="left"
             type="monotone"
             dataKey="revenue"
             stroke="hsl(var(--primary))"
